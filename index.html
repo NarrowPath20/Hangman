@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hangman</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="app">
+    <div class="theme-toolbar"><button id="theme-toggle" class="secondary" type="button" aria-label="Switch to dark mode" title="Switch to dark mode"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g id="sun-icon" hidden><circle cx="12" cy="12" r="4"/><path d="M12 2v2 M12 20v2 M2 12h2 M20 12h2 M5 5l1.5 1.5 M17.5 17.5L19 19 M5 19l1.5-1.5 M17.5 6.5L19 5"/></g><path id="moon-icon" d="M20.5 14A9 9 0 0 1 10 3.5 9 9 0 1 0 20.5 14Z"/></svg></button></div>
+    <header><span class="eyebrow">A LITTLE GUESSWORK. A LOT OF FUN.</span><h1>Phrase Hangman<span>.</span></h1><p>One letter at a time. Can you uncover the phrase?</p></header>
+    <section class="card setup" aria-labelledby="setup-title">
+      <div class="section-heading"><span class="step">01</span><h2 id="setup-title">Pick your phrase</h2></div>
+      <form id="setup-form">
+        <div class="fields">
+          <div><label for="hangman-color">Hangman color</label><input id="hangman-color" type="color" value="#b86a52"></div>
+          <div><label for="phrase-select">Choose a preset</label><select id="phrase-select"><optgroup label="Everyday favorites"><option value="Adventure awaits">Adventure awaits</option><option value="Practice makes perfect">Practice makes perfect</option><option value="The sky is the limit">The sky is the limit</option><option value="Better together">Better together</option></optgroup><optgroup label="Sunday school"><option value="Love your neighbor">Love your neighbor</option><option value="Let your light shine">Let your light shine</option><option value="Faith hope and love">Faith hope and love</option><option value="Be kind to one another">Be kind to one another</option></optgroup><option value="custom">Write a custom phrase…</option></select></div>
+          <div id="custom-field" hidden><label for="custom-phrase">Your secret phrase</label><input id="custom-phrase" type="password" maxlength="100" placeholder="Type a phrase for others to guess" autocomplete="off" aria-describedby="custom-help"><small id="custom-help">Use A–Z letters, spaces, and punctuation. Up to 100 characters.</small></div>
+          <div><label for="face-select">Face style</label><select id="face-select" aria-describedby="face-help"><option value="none">Classic (no face)</option><option value="smile">Big smile</option><option value="wink">Cheeky wink</option><option value="surprised">Whoops!</option><option value="cool">Cool sunglasses</option><option value="tongue">Tongue out</option><option value="image">Custom face image</option></select><small id="face-help">Your face appears when the head is drawn.</small></div>
+          <div id="face-upload" hidden>
+            <label for="face-file">Choose a face image</label>
+            <input id="face-file" type="file" accept="image/jpeg,image/png,image/webp,image/gif" aria-describedby="face-image-help face-image-status">
+            <small id="face-image-help">JPG, PNG, WebP, or GIF, up to 5 MB. Use a centered face for the circular crop. Your image stays in this browser tab; choose it again after refreshing.</small>
+            <p id="face-image-status" role="status" aria-live="polite"></p>
+            <div id="face-preview-row" hidden><img id="face-preview" alt="Custom face preview"><button id="remove-face" class="secondary" type="button">Remove image</button></div>
+          </div>
+        </div>
+        <p id="form-error" class="error" role="alert"></p>
+        <button class="primary" type="submit">Start game <span aria-hidden="true">→</span></button>
+      </form>
+    </section>
+    <section id="game" class="card game" aria-labelledby="game-title" hidden>
+      <div class="game-top"><div class="section-heading"><span class="step">02</span><h2 id="game-title">Guess the phrase</h2></div><button id="new-game" class="secondary" type="button">New game</button></div>
+      <div class="play-area">
+        <div class="drawing-panel">
+          <svg viewBox="0 0 240 220" role="img" aria-labelledby="drawing-title"><title id="drawing-title">Hangman: 0 of 6 incorrect guesses</title><g class="scaffold"><path d="M30 200 H210 M65 200 V20 H155 V45 M65 50 L95 20"/></g><g class="person"><circle data-part cx="155" cy="66" r="21" hidden/><path data-part d="M155 87 V143" hidden/><path data-part d="M155 102 L120 125" hidden/><path data-part d="M155 102 L190 125" hidden/><path data-part d="M155 143 L126 179" hidden/><path data-part d="M155 143 L184 179" hidden/></g></svg>
+          <div class="chances"><strong id="remaining">6</strong> incorrect guesses left</div>
+          <div id="chance-dots" class="dots" aria-hidden="true"></div>
+        </div>
+        <div class="phrase-panel"><span class="eyebrow">THE MYSTERY PHRASE</span><div id="phrase" class="phrase" aria-label="Hidden phrase"></div><p id="status" role="status" aria-live="polite" aria-atomic="true">Choose a letter to get started.</p></div>
+      </div>
+      <div class="keyboard-heading"><h3>Pick a letter</h3><span>You can use your keyboard, too</span></div><div id="keyboard" class="keyboard" aria-label="Alphabet letters"></div>
+      <div class="key-legend"><span><i class="correct-dot"></i> In the phrase</span><span><i class="wrong-dot"></i> Not in the phrase</span></div>
+    </section>
+    <footer>A phrase, a few guesses, and a little teamwork.</footer>
+  </main>
+</body>
+</html>
