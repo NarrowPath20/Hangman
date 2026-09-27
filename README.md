@@ -1,4 +1,4 @@
-#Hangman
+# Hangman
 
 A browser-based phrase guessing game built with HTML, CSS, and JavaScript. Choose an everyday or Sunday school phrase, or enter your own for friends, family, or a class to guess.
 
